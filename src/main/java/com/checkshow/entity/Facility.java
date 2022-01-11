@@ -9,6 +9,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Facility Entity
@@ -65,10 +67,10 @@ public class Facility {
     private double longitude;
 
     @CreatedDate
-    private java.util.Date createdDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
-    private java.util.Date modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @Builder
     public Facility(String id, String facilityName, String facilityCount, String facilityCharacteristic, Short yearOpen, Short seatScale, String telNumber, String relateUrl, String address, double latitude, double longitude) {

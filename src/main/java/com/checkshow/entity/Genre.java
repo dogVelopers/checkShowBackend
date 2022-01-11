@@ -24,15 +24,15 @@ public class Genre {
     private Short id;
 
     @Column(nullable = false)
-    private String comment;
+    private String code;
 
     @Column(nullable = false)
-    private String detailComment;
+    private String detailCode;
 
     @Builder
-    public Genre(Short id, String comment, String detailComment) {
+    public Genre(Short id, String code, String detailCode) {
         this.id = id;
-        this.comment = comment;
-        this.detailComment = detailComment;
+        this.code = code;
+        this.detailCode = detailCode;
     }
 }

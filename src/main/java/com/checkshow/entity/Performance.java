@@ -9,6 +9,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -59,10 +61,10 @@ public class Performance {
     private String performanceName;
 
     @Column
-    private java.util.Date startDate;
+    private LocalDate startDate;
 
     @Column
-    private java.util.Date endDate;
+    private LocalDate endDate;
 
     @Column
     private String cast;
@@ -80,6 +82,9 @@ public class Performance {
     private String productionCompany;
 
     @Column
+    private String price;
+
+    @Column
     private String posterUrl;
 
     @Column
@@ -89,13 +94,13 @@ public class Performance {
     private Boolean openRun;
 
     @CreatedDate
-    private java.util.Date createdDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
-    private java.util.Date modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @Builder
-    public Performance(String id, Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, Date startDate, Date endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String posterUrl, String story, Boolean openRun) {
+    public Performance(String id, Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun) {
         this.id = id;
         this.genre = genre;
         this.state = state;
@@ -109,6 +114,26 @@ public class Performance {
         this.runtime = runtime;
         this.age = age;
         this.productionCompany = productionCompany;
+        this.price = price;
+        this.posterUrl = posterUrl;
+        this.story = story;
+        this.openRun = openRun;
+    }
+
+    public void update(Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun) {
+        this.genre = genre;
+        this.state = state;
+        this.facility = facility;
+        this.facilityDetailName = facilityDetailName;
+        this.performanceName = performanceName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.cast = cast;
+        this.crew = crew;
+        this.runtime = runtime;
+        this.age = age;
+        this.productionCompany = productionCompany;
+        this.price = price;
         this.posterUrl = posterUrl;
         this.story = story;
         this.openRun = openRun;
