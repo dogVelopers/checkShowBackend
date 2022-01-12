@@ -1,5 +1,6 @@
 package com.checkshow.entity;
 
+import com.checkshow.entity.constant.GenreEnum;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,5 +35,9 @@ public class Genre {
         this.id = id;
         this.code = code;
         this.detailCode = detailCode;
+    }
+
+    public GenreEnum toEnum() {
+        return GenreEnum.findById(this.id);
     }
 }

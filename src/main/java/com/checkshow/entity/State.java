@@ -1,5 +1,6 @@
 package com.checkshow.entity;
 
+import com.checkshow.entity.constant.StateEnum;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,5 +30,9 @@ public class State {
     public State(Short id, String comment) {
         this.id = id;
         this.comment = comment;
+    }
+
+    public StateEnum toEnum() {
+        return StateEnum.findById(this.id);
     }
 }
