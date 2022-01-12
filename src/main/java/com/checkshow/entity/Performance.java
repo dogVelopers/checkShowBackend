@@ -11,7 +11,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Performance Entity
@@ -90,7 +89,7 @@ public class Performance {
     @Column
     private String story;
 
-    @Column(nullable = false, columnDefinition = "tinyint", length = 1)
+    @Column(columnDefinition = "tinyint(1) default '0'", length = 1)
     private Boolean openRun;
 
     @CreatedDate
@@ -102,25 +101,6 @@ public class Performance {
     @Builder
     public Performance(String id, Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun) {
         this.id = id;
-        this.genre = genre;
-        this.state = state;
-        this.facility = facility;
-        this.facilityDetailName = facilityDetailName;
-        this.performanceName = performanceName;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.cast = cast;
-        this.crew = crew;
-        this.runtime = runtime;
-        this.age = age;
-        this.productionCompany = productionCompany;
-        this.price = price;
-        this.posterUrl = posterUrl;
-        this.story = story;
-        this.openRun = openRun;
-    }
-
-    public void update(Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun) {
         this.genre = genre;
         this.state = state;
         this.facility = facility;

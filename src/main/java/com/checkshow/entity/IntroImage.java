@@ -24,7 +24,7 @@ public class IntroImage {
     private Long id;
 
     @ManyToOne(targetEntity = Performance.class)
-    @JoinColumn(name = "performance_id")
+    @JoinColumn
     private Performance performance;
 
     @Column(nullable = false)
