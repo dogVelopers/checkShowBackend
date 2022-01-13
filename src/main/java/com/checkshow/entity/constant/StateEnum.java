@@ -1,7 +1,12 @@
 package com.checkshow.entity.constant;
 
+import com.checkshow.entity.State;
+import com.checkshow.model.StateService;
+import lombok.Getter;
+
 import java.util.Arrays;
 
+@Getter
 public enum StateEnum {
     공연예정(1, "공연예정"),
     공연중(2, "공연중"),
@@ -27,5 +32,9 @@ public enum StateEnum {
                 .filter(stateEnum -> stateEnum.comment.equals(input))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("comment로 데이터를 찾을 수 없습니다."));
+    }
+
+    public State toEntity(StateService stateService) {
+        return stateService.findById((short) getId());
     }
 }

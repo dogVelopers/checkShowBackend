@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
  * facility : 시설 엔티티
  * facilityDetailName : 시설 자세한명
  * performanceName : 공연명
+ * performanceTime : 공연 시간(스케줄)
  * startDate : 공연 시작일
  * endDate : 공연 종료일
  * cast : 출연진
@@ -58,6 +59,9 @@ public class Performance {
 
     @Column(nullable = false)
     private String performanceName;
+
+    @Column
+    private String performanceTime;
 
     @Column
     private LocalDate startDate;
@@ -99,13 +103,14 @@ public class Performance {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public Performance(String id, Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun) {
+    public Performance(String id, Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, String performanceTime, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.id = id;
         this.genre = genre;
         this.state = state;
         this.facility = facility;
         this.facilityDetailName = facilityDetailName;
         this.performanceName = performanceName;
+        this.performanceTime = performanceTime;
         this.startDate = startDate;
         this.endDate = endDate;
         this.cast = cast;
@@ -117,5 +122,7 @@ public class Performance {
         this.posterUrl = posterUrl;
         this.story = story;
         this.openRun = openRun;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 }

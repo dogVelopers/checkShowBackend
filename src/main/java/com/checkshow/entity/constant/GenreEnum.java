@@ -1,5 +1,7 @@
 package com.checkshow.entity.constant;
 
+import com.checkshow.entity.Genre;
+import com.checkshow.model.GenreService;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -49,5 +51,9 @@ public enum GenreEnum {
                 .filter(genreEnum -> (genreEnum.code + genreEnum.detailCode).equals(input))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("code로 데이터를 찾을 수 없습니다."));
+    }
+
+    public Genre toEntity(GenreService genreService) {
+        return genreService.findById((short) getId());
     }
 }
