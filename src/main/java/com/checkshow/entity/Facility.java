@@ -4,12 +4,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 /**
  * Facility Entity
@@ -27,10 +24,9 @@ import java.time.LocalDateTime;
  */
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Facility {
+public class Facility extends BaseTime {
 
     @Id
     private String id;
@@ -39,7 +35,7 @@ public class Facility {
     private String facilityName;
 
     @Column(nullable = false)
-    private String facilityCount;
+    private Short facilityCount;
 
     @Column
     private String facilityCharacteristic;
@@ -48,7 +44,7 @@ public class Facility {
     private Short yearOpen;
 
     @Column
-    private Short seatScale;
+    private Integer seatScale;
 
     @Column
     private String telNumber;
@@ -65,14 +61,8 @@ public class Facility {
     @Column
     private double longitude;
 
-    @CreatedDate
-    private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedDate;
-
     @Builder
-    public Facility(String id, String facilityName, String facilityCount, String facilityCharacteristic, Short yearOpen, Short seatScale, String telNumber, String relateUrl, String address, double latitude, double longitude) {
+    public Facility(String id, String facilityName, Short facilityCount, String facilityCharacteristic, Short yearOpen, Integer seatScale, String telNumber, String relateUrl, String address, double latitude, double longitude) {
         this.id = id;
         this.facilityName = facilityName;
         this.facilityCount = facilityCount;

@@ -4,13 +4,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Performance Entity
@@ -34,10 +31,9 @@ import java.time.LocalDateTime;
  */
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Performance {
+public class Performance extends BaseTime {
 
     @Id
     private String id;
@@ -96,14 +92,8 @@ public class Performance {
     @Column(columnDefinition = "tinyint(1) default '0'", length = 1)
     private Boolean openRun;
 
-    @CreatedDate
-    private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedDate;
-
     @Builder
-    public Performance(String id, Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, String performanceTime, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public Performance(String id, Genre genre, State state, Facility facility, String facilityDetailName, String performanceName, String performanceTime, LocalDate startDate, LocalDate endDate, String cast, String crew, String runtime, Byte age, String productionCompany, String price, String posterUrl, String story, Boolean openRun) {
         this.id = id;
         this.genre = genre;
         this.state = state;
@@ -122,7 +112,5 @@ public class Performance {
         this.posterUrl = posterUrl;
         this.story = story;
         this.openRun = openRun;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
     }
 }
