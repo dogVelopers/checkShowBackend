@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class FacilityService {
 
-    private FacilityRepository facilityRepository;
+    private final FacilityRepository facilityRepository;
 
     @Transactional
     public String save(final FacilityRequest dto) {
