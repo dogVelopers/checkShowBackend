@@ -11,4 +11,6 @@ import java.util.List;
 public interface IntroImageRepository extends JpaRepository<IntroImage, Long> {
 
     List<IntroImage> findAllByPerformance(Performance performance);
+
+    void deleteAllByPerformance(Performance performance);
 }
