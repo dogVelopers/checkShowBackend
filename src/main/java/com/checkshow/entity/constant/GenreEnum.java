@@ -13,8 +13,8 @@ public enum GenreEnum {
     무용(3, "BB", "BA", "무용"),
     클래식(4, "CC", "CA", "클래식"),
     오페라(5, "CC", "CB", "오페라"),
-    국악(6, "CC", "CC", "국약"),
-    복합(7, "EE", "EA", "복");
+    국악(6, "CC", "CC", "국악"),
+    복합(7, "EE", "EA", "복합");
 
     private final int id;
     private final String code;
@@ -36,7 +36,7 @@ public enum GenreEnum {
         return Arrays.stream(GenreEnum.values())
                 .filter(genreEnum -> genreEnum.comment.equals(input))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("comment로 데이터를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("comment로 데이터를 찾을 수 없습니다." + input));
     }
 
     public static GenreEnum findById(int input) {
