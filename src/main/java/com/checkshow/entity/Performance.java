@@ -86,7 +86,7 @@ public class Performance extends BaseTime {
     @Column
     private String posterUrl;
 
-    @Column
+    @Column(length = 2000)
     private String story;
 
     @Column(columnDefinition = "tinyint(1) default '0'", length = 1)
