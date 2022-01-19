@@ -10,7 +10,8 @@ import javax.persistence.*;
 /**
  * Ranking Entity
  * id : PK
- * genreCode : 예매상황판용 장르코드(장르 엔티티랑 달라서 따로 뺌)
+ * performance : 공연 매핑
+ * genre : 장르 매핑
  * rankNumber : 순위
  */
 
@@ -27,16 +28,18 @@ public class Ranking {
     @JoinColumn
     private Performance performance;
 
-    private String genreCode;
+    @ManyToOne(targetEntity = Genre.class)
+    @JoinColumn
+    private Genre genre;
 
     @Column(nullable = false)
     private Byte rankNumber;
 
     @Builder
-    public Ranking(Long id, Performance performance, String genreCode, Byte rankNumber) {
+    public Ranking(Long id, Performance performance, Genre genre, Byte rankNumber) {
         this.id = id;
         this.performance = performance;
-        this.genreCode = genreCode;
+        this.genre = genre;
         this.rankNumber = rankNumber;
     }
 }

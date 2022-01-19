@@ -11,4 +11,6 @@ values ('AA', 'AA'),
        ('CC', 'CA'),
        ('CC', 'CB'),
        ('CC', 'CC'),
-       ('EE', 'EA')
+       ('EE', 'EA'),
+       ('KID', ''),
+       ('OPEN', '')
