@@ -2,23 +2,34 @@ package com.checkshow.entity.constant;
 
 import com.checkshow.entity.Genre;
 import com.checkshow.model.GenreService;
+import lombok.AccessLevel;
 import lombok.Getter;
 
 import java.util.Arrays;
 
 @Getter
 public enum GenreEnum {
+    // Performance, RankingEntity 전용
     연극(1, "AA", "AA", "연극"),
     뮤지컬(2, "AA", "AB", "뮤지컬"),
     무용(3, "BB", "BA", "무용"),
     클래식(4, "CC", "CA", "클래식"),
     오페라(5, "CC", "CB", "오페라"),
     국악(6, "CC", "CC", "국악"),
-    복합(7, "EE", "EA", "복합");
+    복합(7, "EE", "EA", "복합"),
+
+    // RankingEntity 전용
+    아동(8, "KID", "", "아동"),
+    오픈런(9, "OPEN", "", "오픈런");
 
     private final int id;
+
+    @Getter(AccessLevel.NONE)
     private final String code;
+
+    @Getter(AccessLevel.NONE)
     private final String detailCode;
+
     private final String comment;
 
     GenreEnum(final int id,
@@ -48,12 +59,16 @@ public enum GenreEnum {
 
     public static GenreEnum findByCode(String input) {
         return Arrays.stream(GenreEnum.values())
-                .filter(genreEnum -> (genreEnum.code + genreEnum.detailCode).equals(input))
+                .filter(genreEnum -> (genreEnum.getCode()).equals(input))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("code로 데이터를 찾을 수 없습니다."));
     }
 
     public Genre toEntity(GenreService genreService) {
         return genreService.findById((short) getId());
+    }
+
+    public String getCode() {
+        return code + detailCode;
     }
 }
