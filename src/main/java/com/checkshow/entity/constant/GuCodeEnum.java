@@ -1,5 +1,8 @@
 package com.checkshow.entity.constant;
 
+import lombok.Getter;
+
+@Getter
 public enum GuCodeEnum {
     서울특별시("11", "서울특별시"),
     부산광역시("26", "부산광역시"),
