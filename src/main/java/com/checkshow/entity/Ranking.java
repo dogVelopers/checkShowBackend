@@ -32,14 +32,18 @@ public class Ranking {
     @JoinColumn
     private Genre genre;
 
+    @Column
+    private String guCode;
+
     @Column(nullable = false)
     private Byte rankNumber;
 
     @Builder
-    public Ranking(Long id, Performance performance, Genre genre, Byte rankNumber) {
+    public Ranking(Long id, Performance performance, Genre genre, String guCode, Byte rankNumber) {
         this.id = id;
         this.performance = performance;
         this.genre = genre;
+        this.guCode = guCode;
         this.rankNumber = rankNumber;
     }
 }
