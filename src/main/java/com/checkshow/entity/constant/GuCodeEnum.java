@@ -2,6 +2,8 @@ package com.checkshow.entity.constant;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum GuCodeEnum {
     서울특별시("11", "서울특별시"),
@@ -29,5 +31,12 @@ public enum GuCodeEnum {
     GuCodeEnum(final String guCode, final String guName) {
         this.guCode = guCode;
         this.guName = guName;
+    }
+
+    public static GuCodeEnum findByGuCode(String guCode) {
+        return Arrays.stream(GuCodeEnum.values())
+                .filter(guCodeEnum -> guCodeEnum.guCode.equals(guCode))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("guCode로 데이터를 찾을 수 없습니다."));
     }
 }
