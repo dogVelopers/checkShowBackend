@@ -3,6 +3,7 @@ package com.checkshow.dto.request;
 import com.checkshow.entity.Genre;
 import com.checkshow.entity.Performance;
 import com.checkshow.entity.Ranking;
+import lombok.Builder;
 
 public class RankingRequest {
 
@@ -18,5 +19,13 @@ public class RankingRequest {
                 .guCode(guCode)
                 .rankNumber(rankNumber)
                 .build();
+    }
+
+    @Builder
+    public RankingRequest(Performance performance, Genre genre, String guCode, Byte rankNumber) {
+        this.performance = performance;
+        this.genre = genre;
+        this.guCode = guCode;
+        this.rankNumber = rankNumber;
     }
 }
