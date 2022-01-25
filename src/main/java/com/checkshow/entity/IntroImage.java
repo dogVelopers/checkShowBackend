@@ -20,8 +20,7 @@ import javax.persistence.*;
 public class IntroImage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @ManyToOne(targetEntity = Performance.class)
     @JoinColumn
@@ -31,7 +30,7 @@ public class IntroImage {
     private String url;
 
     @Builder
-    public IntroImage(Long id, Performance performance, String url) {
+    public IntroImage(String id, Performance performance, String url) {
         this.id = id;
         this.performance = performance;
         this.url = url;
