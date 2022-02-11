@@ -1,6 +1,8 @@
 package com.checkshow.model;
 
 import com.checkshow.dto.request.RankingRequest;
+import com.checkshow.dto.response.RankingResponse;
+import com.checkshow.entity.Genre;
 import com.checkshow.entity.Ranking;
 import com.checkshow.repository.RankingRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ public class RankingService {
     private final RankingRepository rankingRepository;
 
     @Transactional
-    public void saveAll(List<RankingRequest> list) {
+    public void saveAll(final List<RankingRequest> list) {
         List<Ranking> rankings = list.stream().map(RankingRequest::toEntity).collect(Collectors.toList());
         rankingRepository.saveAll(rankings);
     }
@@ -25,5 +27,16 @@ public class RankingService {
     @Transactional
     public void deleteAll() {
         rankingRepository.deleteAll();
+    }
+
+    public RankingResponse findById(final Long id) {
+        Ranking entity = rankingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("404"));
+        return new RankingResponse(entity);
+    }
+
+    public List<RankingResponse> findAllByGenreAndGuCodeOrderByRankNumber(final Genre genre, final String guCode) {
+        List<Ranking> rankingList = rankingRepository.findAllByGenreAndGuCodeOrderByRankNumber(genre, guCode);
+
+        return rankingList.stream().map(RankingResponse::new).collect(Collectors.toList());
     }
 }
