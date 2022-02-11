@@ -25,8 +25,8 @@ public class RankingController {
     private final GenreService genreService;
 
     @GetMapping("/rankings")
-    public ResponseEntity<List<RankingResponse>> findAllByGenreAndGuCodeOrderByRankNumber(final Integer genreId, final String guCode) {
-        Genre genre = GenreEnum.findById(genreId).toEntity(genreService);
+    public ResponseEntity<List<RankingResponse>> findAllByGenreAndGuCodeOrderByRankNumber(final Short genreId, final String guCode) {
+        Genre genre = genreService.findById(genreId);
         GuCodeEnum.findByGuCode(guCode);
 
         List<RankingResponse> rankingResponses = rankingService.findAllByGenreAndGuCodeOrderByRankNumber(genre, guCode);

@@ -51,18 +51,18 @@ public class PerformanceController {
 
     @GetMapping("/performances")
     public ResponseEntity<Page<PerformanceResponse>> findAll(Pageable pageable,
-                                             final Integer genreId,
-                                             final Integer stateId,
+                                             final Short genreId,
+                                             final Short stateId,
                                              final Byte age) {
         Genre genre = null;
         State state = null;
 
         if (genreId != null) {
-            genre = GenreEnum.findById(genreId).toEntity(genreService);
+            genre = genreService.findById(genreId);
         }
 
         if (stateId != null) {
-            state = StateEnum.findById(stateId).toEntity(stateService);
+            state = stateService.findById(stateId);
         }
 
         Page<PerformanceResponse> performanceResponses = performanceService.search(pageable, genre, state, age);
