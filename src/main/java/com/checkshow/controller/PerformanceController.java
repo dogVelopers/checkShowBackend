@@ -4,8 +4,6 @@ import com.checkshow.dto.response.IntroImageResponse;
 import com.checkshow.dto.response.PerformanceResponse;
 import com.checkshow.entity.Genre;
 import com.checkshow.entity.State;
-import com.checkshow.entity.constant.GenreEnum;
-import com.checkshow.entity.constant.StateEnum;
 import com.checkshow.model.GenreService;
 import com.checkshow.model.IntroImageService;
 import com.checkshow.model.PerformanceService;
@@ -66,6 +64,10 @@ public class PerformanceController {
         }
 
         Page<PerformanceResponse> performanceResponses = performanceService.search(pageable, genre, state, age);
+
+        if (performanceResponses.isEmpty()) {
+            return new ResponseEntity<>(performanceResponses, HttpStatus.NO_CONTENT);
+        }
 
         return new ResponseEntity<>(performanceResponses, HttpStatus.OK);
     }

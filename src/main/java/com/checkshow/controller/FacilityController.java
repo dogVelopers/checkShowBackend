@@ -30,6 +30,10 @@ public class FacilityController {
     public ResponseEntity<Page<FacilityResponse>> findByAll(Pageable pageable) {
         Page<FacilityResponse> page = facilityService.findAll(pageable);
 
+        if (page.isEmpty()) {
+            return new ResponseEntity<>(page, HttpStatus.NO_CONTENT);
+        }
+
         return new ResponseEntity<>(page, HttpStatus.OK);
     }
 }

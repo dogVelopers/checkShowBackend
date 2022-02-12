@@ -2,7 +2,6 @@ package com.checkshow.controller;
 
 import com.checkshow.dto.response.RankingResponse;
 import com.checkshow.entity.Genre;
-import com.checkshow.entity.constant.GenreEnum;
 import com.checkshow.entity.constant.GuCodeEnum;
 import com.checkshow.model.GenreService;
 import com.checkshow.model.RankingService;
@@ -30,6 +29,10 @@ public class RankingController {
         GuCodeEnum.findByGuCode(guCode);
 
         List<RankingResponse> rankingResponses = rankingService.findAllByGenreAndGuCodeOrderByRankNumber(genre, guCode);
+
+        if (rankingResponses.isEmpty()) {
+            return new ResponseEntity<>(rankingResponses, HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(rankingResponses, HttpStatus.OK);
     }
 }
