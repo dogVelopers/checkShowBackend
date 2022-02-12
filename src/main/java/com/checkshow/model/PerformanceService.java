@@ -5,6 +5,8 @@ import com.checkshow.dto.response.PerformanceResponse;
 import com.checkshow.entity.Genre;
 import com.checkshow.entity.Performance;
 import com.checkshow.entity.State;
+import com.checkshow.exception.CustomException;
+import com.checkshow.exception.ErrorCode;
 import com.checkshow.predicate.PerformancePredicate;
 import com.checkshow.repository.PerformanceRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +28,7 @@ public class PerformanceService {
     }
 
     public PerformanceResponse findById(final String id) {
-        Performance entity = performanceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("404"));
+        Performance entity = performanceRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.PERFORMANCE_NOT_FOUND));
         return new PerformanceResponse(entity);
     }
 

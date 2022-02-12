@@ -1,5 +1,7 @@
 package com.checkshow.entity.constant;
 
+import com.checkshow.exception.CustomException;
+import com.checkshow.exception.ErrorCode;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -37,6 +39,6 @@ public enum GuCodeEnum {
         return Arrays.stream(GuCodeEnum.values())
                 .filter(guCodeEnum -> guCodeEnum.guCode.equals(guCode))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("guCode로 데이터를 찾을 수 없습니다."));
+                .orElseThrow(() -> new CustomException(ErrorCode.GU_CODE_NOT_FOUND));
     }
 }

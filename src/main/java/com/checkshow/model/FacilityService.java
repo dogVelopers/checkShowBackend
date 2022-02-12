@@ -3,6 +3,8 @@ package com.checkshow.model;
 import com.checkshow.dto.request.FacilityRequest;
 import com.checkshow.dto.response.FacilityResponse;
 import com.checkshow.entity.Facility;
+import com.checkshow.exception.CustomException;
+import com.checkshow.exception.ErrorCode;
 import com.checkshow.repository.FacilityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,7 +31,7 @@ public class FacilityService {
     }
 
     public FacilityResponse findById(final String id) {
-        Facility entity = facilityRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("404"));
+        Facility entity = facilityRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.FACILITY_NOT_FOUND));
         return new FacilityResponse(entity);
     }
 }
