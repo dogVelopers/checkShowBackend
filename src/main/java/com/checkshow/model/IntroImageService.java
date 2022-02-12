@@ -4,6 +4,8 @@ import com.checkshow.dto.request.IntroImageRequest;
 import com.checkshow.dto.response.IntroImageResponse;
 import com.checkshow.entity.IntroImage;
 import com.checkshow.entity.Performance;
+import com.checkshow.exception.CustomException;
+import com.checkshow.exception.ErrorCode;
 import com.checkshow.repository.IntroImageRepository;
 import com.checkshow.repository.PerformanceRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +35,7 @@ public class IntroImageService {
     }
 
     public List<IntroImageResponse> findAllByPerformanceId(final String id) {
-        Performance performance = performanceRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("404"));
+        Performance performance = performanceRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.PERFORMANCE_NOT_FOUND));
         List<IntroImage> list = introImageRepository.findAllByPerformance(performance);
 
         return list.stream().map(IntroImageResponse::new).collect(Collectors.toList());

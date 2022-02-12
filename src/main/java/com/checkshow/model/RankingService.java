@@ -4,6 +4,8 @@ import com.checkshow.dto.request.RankingRequest;
 import com.checkshow.dto.response.RankingResponse;
 import com.checkshow.entity.Genre;
 import com.checkshow.entity.Ranking;
+import com.checkshow.exception.CustomException;
+import com.checkshow.exception.ErrorCode;
 import com.checkshow.repository.RankingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class RankingService {
     }
 
     public RankingResponse findById(final Long id) {
-        Ranking entity = rankingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("404"));
+        Ranking entity = rankingRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.RANKING_NOT_FOUND));
         return new RankingResponse(entity);
     }
 
