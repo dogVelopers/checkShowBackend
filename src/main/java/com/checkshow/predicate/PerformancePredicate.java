@@ -22,7 +22,7 @@ public class PerformancePredicate {
         }
 
         if (age != null) {
-            builder.and(performance.age.eq(age));
+            builder.and(performance.age.lt(age));
         }
 
         return builder;
