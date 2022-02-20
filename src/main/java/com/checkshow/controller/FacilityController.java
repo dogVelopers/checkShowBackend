@@ -27,13 +27,18 @@ public class FacilityController {
     }
 
     @GetMapping("/facilities")
-    public ResponseEntity<Page<FacilityResponse>> findByAll(Pageable pageable) {
+    public ResponseEntity<Object> findByAll(final Pageable pageable,
+                                            final Boolean onlyContent) {
         Page<FacilityResponse> page = facilityService.findAll(pageable);
 
         if (page.isEmpty()) {
             return new ResponseEntity<>(page, HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(page, HttpStatus.OK);
+        if (onlyContent == null || !onlyContent) {
+            return new ResponseEntity<>(page, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
+        }
     }
 }

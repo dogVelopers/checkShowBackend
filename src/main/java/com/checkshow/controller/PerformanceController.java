@@ -44,14 +44,19 @@ public class PerformanceController {
     public ResponseEntity<List<IntroImageResponse>> findIntroImagesByPerformanceId(@PathVariable final String id) {
         List<IntroImageResponse> introImageResponses = introImageService.findAllByPerformanceId(id);
 
+        if (introImageResponses.isEmpty()) {
+            return new ResponseEntity<>(introImageResponses, HttpStatus.NO_CONTENT);
+        }
+
         return new ResponseEntity<>(introImageResponses, HttpStatus.OK);
     }
 
     @GetMapping("/performances")
-    public ResponseEntity<Page<PerformanceResponse>> findAll(Pageable pageable,
-                                             final Short genreId,
-                                             final Short stateId,
-                                             final Byte age) {
+    public ResponseEntity<Object> findAll(Pageable pageable,
+                                          final Short genreId,
+                                          final Short stateId,
+                                          final Byte age,
+                                          final Boolean onlyContent) {
         Genre genre = null;
         State state = null;
 
@@ -69,7 +74,11 @@ public class PerformanceController {
             return new ResponseEntity<>(performanceResponses, HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(performanceResponses, HttpStatus.OK);
+        if (onlyContent == null || !onlyContent) {
+            return new ResponseEntity<>(performanceResponses, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(performanceResponses.getContent(), HttpStatus.OK);
+        }
     }
 
 }
