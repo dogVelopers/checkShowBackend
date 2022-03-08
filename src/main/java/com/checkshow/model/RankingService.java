@@ -20,6 +20,8 @@ public class RankingService {
 
     private final RankingRepository rankingRepository;
 
+    private final IntroImageService introImageService;
+
     @Transactional
     public void saveAll(final List<RankingRequest> list) {
         List<Ranking> rankings = list.stream().map(RankingRequest::toEntity).collect(Collectors.toList());
@@ -33,12 +35,12 @@ public class RankingService {
 
     public RankingResponse findById(final Long id) {
         Ranking entity = rankingRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.RANKING_NOT_FOUND));
-        return new RankingResponse(entity);
+        return new RankingResponse(entity, introImageService);
     }
 
     public List<RankingResponse> findAllByGenreAndGuCodeOrderByRankNumber(final Genre genre, final String guCode) {
         List<Ranking> rankingList = rankingRepository.findAllByGenreAndGuCodeOrderByRankNumber(genre, guCode);
 
-        return rankingList.stream().map(RankingResponse::new).collect(Collectors.toList());
+        return rankingList.stream().map(x -> new RankingResponse(x, introImageService)).collect(Collectors.toList());
     }
 }
