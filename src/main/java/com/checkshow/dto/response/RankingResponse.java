@@ -2,22 +2,24 @@ package com.checkshow.dto.response;
 
 import com.checkshow.entity.Ranking;
 import com.checkshow.entity.constant.GuCodeEnum;
+import com.checkshow.model.IntroImageService;
 import lombok.Getter;
 
-@Getter
-public class RankingResponse {
+import java.util.List;
 
-    private final Long id;
-    private final PerformanceResponse performance;
+@Getter
+public class RankingResponse extends PerformanceResponse {
+
     private final String genreComment;
     private final String guName;
     private final Byte rankNumber;
+    private final List<IntroImageResponse> introImages;
 
-    public RankingResponse(Ranking entity) {
-        this.id = entity.getId();
-        this.performance = new PerformanceResponse(entity.getPerformance());
+    public RankingResponse(Ranking entity, IntroImageService introImageService) {
+        super(entity.getPerformance());
         this.genreComment = entity.getGenre().toEnum().getComment();
         this.guName = GuCodeEnum.findByGuCode(entity.getGuCode()).getGuName();
         this.rankNumber = entity.getRankNumber();
+        this.introImages = introImageService.findAllByPerformanceId(getId());
     }
 }
